@@ -95,4 +95,13 @@ public class FrameworkClass
         return multiple
     }
  
+    
+    // MARK: Api call
+    
+    func APICll(){
+        APICall.getClasses(view: nil, apiName: "https://reqres.in/api/products/3", apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
+            
+        }
+    }
+    
 } // end public class FrameworkClass
