@@ -99,7 +99,7 @@ public class FrameworkClass
     // MARK: Api call
     
     public func APICll(baseUrl:String,view:UIViewController){
-        DPLoader.dismiss(InView: view.view)
+        DPLoader.show(InView: view.view, "Loading")
         APICall.getCardInfo(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
             DPLoader.dismiss(InView: view.view)
             if isSucess {
