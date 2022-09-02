@@ -100,7 +100,7 @@ struct APICall {
 //                return
 //            }
             if let classArray = JSON as? [NSDictionary] {
-                complition(true,responseCode,message,classArray)
+                complition(true,statusCode,message,classArray)
                 return
             }
             complition(false,statusCode,message,[[:]])
