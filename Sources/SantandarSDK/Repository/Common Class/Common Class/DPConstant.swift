@@ -294,6 +294,8 @@ public struct DPValidation {
 }
 
 struct APIName {
+    
+    static var getCardAuthorize           = "products/3"
     // Get schools type
     static var getSchoolType              = "user/school/type"
     static var getLanguages               = "language/all"

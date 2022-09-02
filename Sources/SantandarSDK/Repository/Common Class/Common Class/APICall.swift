@@ -95,16 +95,16 @@ struct APICall {
         
         DPWebService.DPService(methodName: .GET, view: view, isUserInteractionEnabled: false, returnFailedBlock: true, api: apiName, message: "", body: dictionary) { (JSON, statusCode, message) in
             
-            guard let responseCode = JSON[APIKeyName.code] as? Int else {
-                complition(false,statusCode,message,[[:]])
-                return
-            }
-            if let classArray = JSON["response"] as? [NSDictionary] {
-                kUserDefults(JSON[APIKeyName.lastUpdatedTime], key: apiCallTimeKeyName) // save api call time so next time this time stamp will be sent
-                complition(true,responseCode,message,classArray)
-                return
-            }
-            complition(false,responseCode,message,[[:]])
+//            guard let responseCode = JSON[APIKeyName.code] as? Int else {
+//                complition(false,statusCode,message,[[:]])
+//                return
+//            }
+//            if let classArray = JSON["response"] as? [NSDictionary] {
+//                kUserDefults(JSON[APIKeyName.lastUpdatedTime], key: apiCallTimeKeyName) // save api call time so next time this time stamp will be sent
+//                complition(true,responseCode,message,classArray)
+//                return
+//            }
+            complition(true,statusCode,message,JSON)
         }
     }
   

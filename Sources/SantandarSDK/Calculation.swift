@@ -98,8 +98,8 @@ public class FrameworkClass
     
     // MARK: Api call
     
-    public func APICll(){
-        APICall.getClasses(view: nil, apiName: "https://reqres.in/api/products/3", apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
+    public func APICll(baseUrl:String){
+        APICall.getClasses(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
             if isSucess {
                 
             }else{
