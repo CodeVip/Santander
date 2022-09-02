@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 import UIKit
-//import RxSwift
 
 extension NSManagedObject{
     
@@ -20,58 +19,6 @@ extension NSManagedObject{
 }
 
 struct APICall {
-    public static func checkForSchoolRoleId(apiName: String, dictionary: NSMutableDictionary) -> NSMutableDictionary {
-        if  apiName == APIName.authToken ||
-                apiName == APIName.userRoles ||
-                apiName == APIName.schoolSignUp ||
-                apiName == APIName.getSchoolType ||
-                apiName == APIName.forgotPassword ||
-                apiName == APIName.getParentType ||
-                apiName == APIName.joinASchool ||
-                apiName == APIName.setPassword ||
-                apiName == APIName.country ||
-                apiName == APIName.state ||
-                apiName == APIName.city {
-            return dictionary
-        }
-        return dictionary
-    }
-    
-    
-  
-    
-    //MARK: Get Parent Type API
-    public static func getParentType() {
-        DPWebService.DPService(methodName: .GET, view: nil, isUserInteractionEnabled: false, returnFailedBlock: false, api: APIName.getParentType, message: "", body: nil) {(JSON, statusCode, message) in
-            if statusCode == StatusCode.ok.rawValue {
-                guard let parentTypeArray = JSON["response"] as? [NSDictionary] else {return}
-              
-            }
-        }
-    }
-    
-    //MARK: Auth Token API
-    public static func authTokenDict(email: String, password: String) -> NSMutableDictionary {
-        let body = NSMutableDictionary()
-        body[DPKeysProject.username]  = email
-        body[DPKeysProject.password]  = password
-        return body
-    }
-    
-
-    
-    //MARK: Device Register API
-    public static func deviceInfoDict() -> NSMutableDictionary {
-        var deviceInfoDict = NSMutableDictionary()
-        deviceInfoDict["deviceType"]  = 1 // 1 - ios, 2 - android, 3 - web
-        deviceInfoDict["deviceToken"] = kUserDefults_(UserDefaultsKeyName.deviceToken) == nil ? Date().timeIntervalSince1970.description : kUserDefults_(UserDefaultsKeyName.deviceToken)
-        deviceInfoDict["deviceOS"]    = UIDevice.current.systemVersion
-        deviceInfoDict["deviceModel"] = UIDevice.current.modelName
-        deviceInfoDict = APICall.checkForSchoolRoleId(apiName: APIName.registerDeviceInfo, dictionary: deviceInfoDict) // it will add schoolId and RoleId to dictionary
-        return deviceInfoDict
-    }
-
-    
     public static func addEditClass(view: UIView?,isIndicater: Bool = false, apiName: String, apiCallTimeKeyName: String? = nil, dictionary: NSMutableDictionary, complition:@escaping (Bool,Int,String,NSDictionary) -> Void) {
         DPWebService.DPService(methodName: .POST, view: view, isUserInteractionEnabled: false, returnFailedBlock: true, api: apiName, message: "", body: dictionary) { (JSON, statusCode, message) in
             
@@ -91,7 +38,7 @@ struct APICall {
     }
     
     //MARK: Classes API
-    public static func getClasses(view: UIView? ,isIndicater: Bool = false, apiName: String, apiCallTimeKeyName: String, dictionary: NSMutableDictionary, complition:@escaping (Bool,Int,String,[NSDictionary]) -> Void) {
+    public static func getCardInfo(view: UIView? ,isIndicater: Bool = false, apiName: String, apiCallTimeKeyName: String, dictionary: NSMutableDictionary, complition:@escaping (Bool,Int,String,[NSDictionary]) -> Void) {
         
         DPWebService.DPService(methodName: .GET, view: view, isUserInteractionEnabled: false, returnFailedBlock: true, api: apiName, message: "", body: dictionary) { (JSON, statusCode, message) in
             
@@ -106,5 +53,4 @@ struct APICall {
             complition(false,statusCode,message,[[:]])
         }
     }
-  
 }

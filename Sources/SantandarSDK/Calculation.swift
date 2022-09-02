@@ -99,7 +99,7 @@ public class FrameworkClass
     // MARK: Api call
     
     public func APICll(baseUrl:String){
-        APICall.getClasses(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
+        APICall.getCardInfo(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
             if isSucess {
                 
             }else{

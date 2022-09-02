@@ -72,14 +72,7 @@ class DPWebService: NSObject {
             UIAlertController.showAlertError(message:noInternet)
             return
         }
-        
-        let baseURL =  DPConfigClass.sharedInstance.baseURL
-        var url = URL(string:api)
-//        if api == "v2/credit_card/create"{
-//            url = URL(string: "https://stage.wepayapi.com/" + api)
-//        }else{
-//            url = URL(string: baseURL + api)
-//        }
+        var url = URL(string: api)
         debugPrint(url ?? "")
         
         let apiParameter = DPWebService.stringFromDictionary(apibody: body ?? [:])
@@ -109,24 +102,9 @@ class DPWebService: NSObject {
                 debugPrint(NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String)
             }
         
-        
-        if view != nil  {
-            DPLoader.show(InView:view, message)
-        }else {
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            }
-        }
-        debugPrint("\n\n ==========\n CURL REQUEST  ==== \n \((request as URLRequest).curlString)  \n =========== \n")
+       // debugPrint("\n\n ==========\n CURL REQUEST  ==== \n \((request as URLRequest).curlString)  \n =========== \n")
         let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             DispatchQueue.main.async {
-                if view != nil  {
-                    DPLoader.dismiss(InView:view)
-                }else {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    }
-                }
                 if data != nil {
                     let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                     debugPrint("\n\n ==========\n Response - \(api)  : \n  \(strData!)  \n =========== \n")
@@ -192,136 +170,15 @@ class DPWebService: NSObject {
     }
     
     public static func isErrorMessageDisplay(apiname: String) -> Bool {
-        if apiname ==  APIName.getSchoolType  ||
-            apiname == APIName.getParentType ||
-            apiname == APIName.getClasses ||
-            apiname == APIName.getStaffs ||
-            apiname == APIName.getStudents ||
-            apiname == APIName.getParents  ||
-            apiname == APIName.moduleMenuMobile  ||
-            apiname == APIName.staffDashboard    ||
-            apiname == APIName.getAdminDashBoardMobile   ||
-            apiname == APIName.parentDashboard  ||
-            apiname == APIName.country  ||
-            apiname == APIName.state  ||
-            apiname == APIName.city  ||
-            apiname == APIName.getLanguages ||
-            apiname == APIName.getAdminDashBoardMobile ||
-            apiname == APIName.parentDashboard ||
-            apiname == APIName.staffDashboard ||
-            apiname == APIName.appUpdateVersion
+        if apiname ==  APIName.getCardAuthorize
         {
             return false
         }
         return true
     }
     
-    public class  func multiPart(request:NSMutableURLRequest,apibody:NSMutableDictionary) -> NSMutableURLRequest {
-        let boundary = "---------------------------14737809831466499882746641449"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        let body = NSMutableData()
-        debugPrint(apibody.allKeys)
-        for key in apibody.allKeys {
-            if apibody[key as! String]!  is NSString {
-                body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                body.append("Content-Disposition:form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-                body.append("\(apibody[key as! String]!)\r\n".data(using: String.Encoding.utf8)!)
-                
-            }
-            else if apibody[key as! String]!  is NSNumber {
-                
-                body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                body.append("Content-Disposition:form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-                body.append("\(apibody[key as! String]!)\r\n".data(using: String.Encoding.utf8)!)
-                
-            }
-            else if apibody[key as! String]! is UIImage {
-                
-                let image = apibody[key as! String] as! UIImage
-                let imageData = image.jpegData(compressionQuality: 0.1)
-                //let imageData = UIImageJPEGRepresentation(apibody[key as! String] as! UIImage, 0.3)
-                if imageData == nil {
-                    break;
-                }
-                body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                body.append("Content-Disposition:form-data; name=\"\(key)\"; filename=\"a.jpg\"\r\n".data(using: String.Encoding.utf8)!)
-                body.append("Content-Type: \("image/jpeg")\r\n\r\n".data(using: String.Encoding.utf8)!)
-                body.append(imageData!)
-                body.append("\r\n".data(using: String.Encoding.utf8)!)
-            }else if apibody[key as! String]! is [UIImage] {
-                for image in (apibody[key as! String] as! [UIImage]) {
-                    let imageData = image.jpegData(compressionQuality: 0.1)
-                    if imageData == nil {
-                        break;
-                    }
-                    body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("Content-Disposition:form-data; name=\"\(key)\"; filename=\"a.jpg\"\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("Content-Type: \("image/jpeg")\r\n\r\n".data(using: String.Encoding.utf8)!)
-                    body.append(imageData!)
-                    body.append("\r\n".data(using: String.Encoding.utf8)!)
-                }
-            }
-            
-            else if apibody[key as! String]! is NSData {
-                if key as! String == APIKeyName.file { // image upload
-                    
-                }
-                let imageData = apibody[key as! String] as! NSData
-                
-                body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                body.append("Content-Disposition:form-data; name=\"\(key)\"; filename=\"a.png\"\r\n".data(using: String.Encoding.utf8)!)
-                body.append("Content-Type: \("image/png")\r\n\r\n".data(using: String.Encoding.utf8)!)
-                body.append(imageData as Data)
-                body.append("\r\n".data(using: String.Encoding.utf8)!)
-            }else if ((key as! String).contains(".roleId") == true) && (apibody[key as! String]! as? [String] != nil ){
-                let values = apibody[key as! String] as! [String]
-                for value in values {
-                    body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("Content-Disposition:form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("\(value)\r\n".data(using: String.Encoding.utf8)!)
-                }
-            }else if ((key as! String).contains(".roleId") == true) && (apibody[key as! String]! as? [Int] != nil ){
-                let values = apibody[key as! String] as! [Int]
-                for value in values {
-                    body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("Content-Disposition:form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("\(value)\r\n".data(using: String.Encoding.utf8)!)
-                }
-            } else if let media = apibody[key as! String] as? [[String:Any]] {
-                //communication passed from chat(image and documents)
-                for object in media {
-                    if let fileData = object["mediaData"] as? Data {
-                        
-//                        if let mimeType = Swime.mimeType(data: fileData) {
-//                            
-//                            body.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-//                            body.append("Content-Disposition:form-data; name=\"\(key)\"; filename=\"\(object["mediaName"] as! String).\(object["mediaExt"] as! String)\"\r\n".data(using: String.Encoding.utf8)!)
-//                            body.append("Content-Type: \(mimeType.mime)\r\n\r\n".data(using: String.Encoding.utf8)!)
-//                            body.append(fileData)
-//                            body.append("\r\n".data(using: String.Encoding.utf8)!)
-//                        }
-                        
-                    }
-                }
-            }
-        }
-        
-        body.append("--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
-        request.httpBody = body as Data
-        return request
-        
-    }
-    
     class func header(request: NSMutableURLRequest, apiName: String, body: NSMutableDictionary? = nil) -> NSMutableURLRequest {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if apiName != APIName.authToken && apiName != APIName.getSchoolType && apiName != APIName.schoolSignUp && apiName != APIName.forgotPassword && apiName != APIName.setPassword && apiName != APIName.joinASchool && apiName != APIName.appUpdateVersion {
-            let username = kUserDefults_(DPKeysProject.username) as? String
-            let password = kUserDefults_(DPKeysProject.password) as? String
-            let loginString = String(format: "%@:%@", username ?? "", password ?? "")
-            let loginData = loginString.data(using: String.Encoding.utf8)!
-            let base64AuthTokenString = loginData.base64EncodedString()
-            request.setValue("Basic \(base64AuthTokenString)", forHTTPHeaderField: "Authorization")
-        }
         return request
     }
     
@@ -356,17 +213,7 @@ class DPWebService: NSObject {
         }
         return apiParameter
     }
-    
-      class func checkMultipart(_ apibody:NSMutableDictionary) -> Bool {
-        
-        for key in apibody.allValues
-        {
-            if key is UIImage || key is URL || key is NSData || key is Data {
-                return true
-            }
-        }
-        return false
-    }
+
     public class func showAlert(_ JSON:NSDictionary)  {
         
         var message = "No message from Server side"
