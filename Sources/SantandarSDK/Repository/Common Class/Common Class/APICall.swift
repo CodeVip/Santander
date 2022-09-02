@@ -99,12 +99,11 @@ struct APICall {
 //                complition(false,statusCode,message,[[:]])
 //                return
 //            }
-//            if let classArray = JSON["response"] as? [NSDictionary] {
-//                kUserDefults(JSON[APIKeyName.lastUpdatedTime], key: apiCallTimeKeyName) // save api call time so next time this time stamp will be sent
-//                complition(true,responseCode,message,classArray)
-//                return
-//            }
-            complition(true,statusCode,message,JSON)
+            if let classArray = JSON as? [NSDictionary] {
+                complition(true,responseCode,message,classArray)
+                return
+            }
+            complition(false,statusCode,message,[[:]])
         }
     }
   
