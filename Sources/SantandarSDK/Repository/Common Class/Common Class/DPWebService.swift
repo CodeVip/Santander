@@ -285,7 +285,7 @@ class DPLoader : UIView {
                 return
             }
             
-            loader.lblMessage.text = message
+           // loader.lblMessage.text = message
             loader.tag = 1322
             InView?.addSubview(loader)
         })
