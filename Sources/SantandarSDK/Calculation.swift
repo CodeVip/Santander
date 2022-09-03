@@ -100,16 +100,27 @@ public class FrameworkClass
     
     public func APICll(baseUrl:String,view:UIViewController){
         DPLoader.show(InView: view.view.self, "Loading")
-       
-        APICall.getCardInfo(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
-            print("Response loader")
-            DPLoader.dismiss(InView: view.view)
-            if isSucess {
-                
-            }else{
+        
+        APICall.getInformation(url:URL(string:  baseUrl + APIName.getCardAuthorize)!,type: Welcome.self) {  result in
+            switch result{
+            case .success(let data):
+                print(data.data.name)
+                print(data.support.url)
+            case .failure(let error):
+                print(error)
                 
             }
         }
+       
+//        APICall.getCardInfo(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
+//            print("Response loader")
+//            DPLoader.dismiss(InView: view.view)
+//            if isSucess {
+//
+//            }else{
+//
+//            }
+//        }
     }
     
 }

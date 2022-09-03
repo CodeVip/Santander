@@ -37,6 +37,20 @@ struct APICall {
         }
     }
     
+    public static func getInformation<T:Codable>(url:URL,type:T.Type, completion: @escaping (Result<T,Error>)->Void){
+        DPWebService.requestService(url: url, type: type) {  result in
+            switch result{
+            case .success(let welcome):
+               // print(welcome)
+                completion(.success(welcome.self as! T))
+                
+                
+            case .failure(let error):
+                completion(.failure(error))
+                print(error)
+            }
+        }
+    }
     //MARK: Classes API
     public static func getCardInfo(view: UIView? ,isIndicater: Bool = false, apiName: String, apiCallTimeKeyName: String, dictionary: NSMutableDictionary, complition:@escaping (Bool,Int,String,[NSDictionary]) -> Void) {
         

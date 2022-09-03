@@ -61,6 +61,61 @@ class DPWebService: NSObject {
      5. returnFailedBlock :- it you pass false than error popup display ("no data found") no call back for status == false
      if you need to display data for failed staus than you must be pass true
      */
+    
+//    public func sendRequest<T: codable>(for: T.Type = T.self,
+//                                          url: String,
+//                                          method: DPMethod,
+//                                          body: NSMutableDictionary?,
+//                                          completion: @escaping (Result<T>) -> Void) {
+//
+//        return sendRequest(url, method: method, headers: headers, body:body) { data, response, error in
+//            guard let data = data else {
+//                return completion(.failure(error ?? NSError(domain: "SomeDomain", code: -1, userInfo: nil)))
+//            }
+//            do {
+//                let decoder = JSONDecoder()
+//                try completion(.success(decoder.decode(T.self, from: data)))
+//            } catch let decodingError {
+//                completion(.failure(decodingError))
+//            }
+//        }
+//    }
+    enum CustomError:Error{
+        case invalidUrl
+        case inValidData
+    }
+    
+
+    class open func requestService<T:Codable>(url:URL?,type:T.Type,completion: @escaping (Result<T,Error>)->Void){
+        guard let url = url else{
+            completion(.failure(CustomError.invalidUrl))
+            return
+        }
+        let config = URLSessionConfiguration.default
+
+        config.isDiscretionary          = true
+        config.sessionSendsLaunchEvents = true
+        let session = URLSession(configuration: config)
+
+        let task = session.dataTask(with: url) { data, _, error in
+            guard let data = data else{
+                if let error = error{
+                    completion(.failure(error))
+                }else{
+                    completion(.failure(CustomError.inValidData))
+                }
+                return
+            }
+            do{
+                let result = try JSONDecoder().decode(type, from: data)
+                completion(.success(result))
+
+            }catch{
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
 
     class open func DPService (methodName:DPMethod, view:UIView?, isUserInteractionEnabled:Bool, returnFailedBlock:Bool,  api:String,message:String, body:NSMutableDictionary?,Handler complition:@escaping (_ JSON:NSDictionary,_ status:Int,_ message:String) -> Void) {
         
