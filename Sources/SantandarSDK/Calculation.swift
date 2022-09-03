@@ -32,6 +32,7 @@ public class FrameworkClass
        
        containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
        containerView.backgroundColor = UIColor.gray
+        containerView.layer.cornerRadius = 8
 //        let  webView = WKWebView()
 //        containerView = webView
 //        webView.load(URLRequest(url: url))
@@ -50,6 +51,7 @@ public class FrameworkClass
         
         let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-200))
         webV.backgroundColor = .red
+        webV.layer.cornerRadius = 8
         webV.loadRequest(URLRequest(url: url))
         
         containerView.addSubview(webV)
