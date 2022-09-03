@@ -32,19 +32,13 @@ public class FrameworkClass
        
         containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
         containerView.backgroundColor = UIColor.gray
-        let button = UIButton(frame: CGRect(x:  50, y: 50, width: Int(view.view.frame.width) - 100, height: 50))
-        button.backgroundColor = .blue
-        button.setTitle("dismiss", for: .normal)
-        button.addTarget(view, action: #selector(dismiss), for: .touchUpInside)
         let  webView = WKWebView()
-       // webView.navigationDelegate = self
-        containerView = webView
+       // containerView = webView
 
         let url = URL(string: "https://www.earthhero.org")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         containerView.addSubview(webView)
-        containerView.addSubview(button)
         view.view.addSubview(containerView)
 
     }
@@ -111,7 +105,7 @@ public class FrameworkClass
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
-                        fullScreen(view: view, url:url)
+                        self.fullScreen(view: view, url:url)
                     }
                
                 }
