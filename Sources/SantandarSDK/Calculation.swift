@@ -13,7 +13,7 @@ public class FrameworkClass
     public init()
     {
     }
-    var containerView = UIView()
+   
     public func Popup(view:UIViewController){
         let anotherAlert = UIAlertController(title: "New One", message: "The Previous one is dismissed", preferredStyle: .alert)
            let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
@@ -28,40 +28,7 @@ public class FrameworkClass
         view.present(anotherAlert, animated: true, completion: nil)
     }
     
-    public func fullScreen(view:UIViewController, url:URL)  {
-       
-       containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
-       containerView.backgroundColor = UIColor.gray
-        containerView.layer.cornerRadius = 8
-//        let  webView = WKWebView()
-//        containerView = webView
-//        webView.load(URLRequest(url: url))
-//        webView.allowsBackForwardNavigationGestures = true
-
-        // MARK: button
-        let button = UIButton(frame: CGRect(x: 40, y: view.view.frame.height - 100, width: view.view.frame.width - 80, height: 50))
-        button.backgroundColor = .blue
-        button.layer.cornerRadius = 8
-        button.setTitle("Submit button", for: .normal)
-        
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
-        
-        
-        
-        let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
-        webV.backgroundColor = .red
-        webV.layer.cornerRadius = 8
-        webV.loadRequest(URLRequest(url: url))
-        
-        containerView.addSubview(webV)
-        containerView.addSubview(button)
-        view.view.addSubview(containerView)
-
-    }
-    @objc func buttonAction(){
-        containerView.removeFromSuperview()
-    }
+ 
     public func addDouble( left:Double, right:Double ) -> Double
     {
         let sum = left + right
@@ -122,7 +89,7 @@ public class FrameworkClass
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
-                        self.fullScreen(view: view, url:url)
+                        webView().fullScreen(view: view, url:url)
                     }
                
                 }
