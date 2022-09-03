@@ -110,7 +110,10 @@ public class FrameworkClass
                 print(data.data.name)
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
-                fullScreen(view: view, url:url)
+                    DispatchQueue.main.async {
+                        fullScreen(view: view, url:url)
+                    }
+               
                 }
             case .failure(let error):
                 print(error)
