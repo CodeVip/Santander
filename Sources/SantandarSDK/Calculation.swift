@@ -49,7 +49,7 @@ public class FrameworkClass
         
         
         
-        let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-200))
+        let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
         webV.backgroundColor = .red
         webV.layer.cornerRadius = 8
         webV.loadRequest(URLRequest(url: url))
