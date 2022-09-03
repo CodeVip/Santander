@@ -30,14 +30,22 @@ public class FrameworkClass
     
     public func fullScreen(view:UIViewController, url:URL)  {
        
-        containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
-        containerView.backgroundColor = UIColor.gray
-        let  webView = WKWebView()
-       // containerView = webView
-        webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
-        containerView.addSubview(webView)
-        view.view.addSubview(webView)
+//        containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
+//        containerView.backgroundColor = UIColor.gray
+//        let  webView = WKWebView()
+//        containerView = webView
+//        webView.load(URLRequest(url: url))
+//        webView.allowsBackForwardNavigationGestures = true
+//        containerView.addSubview(webView)
+//        view.view.addSubview(containerView)
+        
+        
+        let webV:UIWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.view.frame.width-20, height: view.view.frame.height-20))
+         // webV.loadRequest(NSURLRequest(URL: NSURL(string: "http://www.google.co.in")))
+        webV.backgroundColor = .red
+        webV.loadRequest(URLRequest(url: url))
+        //  webV.delegate = self;
+          view.view.addSubview(webV)
 
     }
     @objc func dismiss(){
