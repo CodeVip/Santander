@@ -116,7 +116,7 @@ public class FrameworkClass
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
-                        webView().fullScreen(view: view, url:url, containerView: containerView)
+                        self.fullScreen(view: view, url:url, containerView: containerView)
                     }
                
                 }
