@@ -37,9 +37,12 @@ public class FrameworkClass
 //        webView.load(URLRequest(url: url))
 //        webView.allowsBackForwardNavigationGestures = true
 
-        let button = UIButton(frame: CGRect(x: 100, y: view.view.frame.height - 100, width: 100, height: 50))
-        button.backgroundColor = .black
-        button.setTitle("Cancel  button", for: .normal)
+        // MARK: button
+        let button = UIButton(frame: CGRect(x: 40, y: view.view.frame.height - 100, width: view.view.frame.width - 80, height: 50))
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 8
+        button.setTitle("Submit button", for: .normal)
+        
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         
