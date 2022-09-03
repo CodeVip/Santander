@@ -29,10 +29,23 @@ public class FrameworkClass
     }
     
     public func fullScreen(view:UIViewController, url:URL)  {
+       
+       containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
+       containerView.backgroundColor = UIColor.gray
+//        let  webView = WKWebView()
+//        containerView = webView
+//        webView.load(URLRequest(url: url))
+//        webView.allowsBackForwardNavigationGestures = true
+
+        
+        
         let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20))
         webV.backgroundColor = .red
         webV.loadRequest(URLRequest(url: url))
-        view.view.addSubview(webV)
+        
+        containerView.addSubview(webV)
+        view.view.addSubview(containerView)
+
     }
     @objc func dismiss(){
         containerView.removeFromSuperview()
