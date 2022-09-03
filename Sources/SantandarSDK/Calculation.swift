@@ -31,7 +31,7 @@ public class FrameworkClass
     
     public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
    
-   containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
+   containerView.frame = CGRect(x: 10, y: 40, width: view.view.frame.width-20, height: view.view.frame.height-80)
    containerView.backgroundColor = UIColor.gray
     containerView.layer.cornerRadius = 8
     // MARK: button
@@ -42,7 +42,7 @@ public class FrameworkClass
     
         button.addTarget(self, action: #selector(FrameworkClass().buttonAction), for: .touchUpInside)
  
-    let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
+    let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 50, width: containerView.frame.width - 20, height: view.view.frame.height-200))
     webV.backgroundColor = .red
     webV.layer.cornerRadius = 8
     webV.loadRequest(URLRequest(url: url))
