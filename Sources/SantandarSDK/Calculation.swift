@@ -33,9 +33,7 @@ public class FrameworkClass
         containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
         containerView.backgroundColor = UIColor.gray
         let  webView = WKWebView()
-       // containerView = webView
-
-        let url = URL(string: "https://www.earthhero.org")!
+        containerView = webView
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         containerView.addSubview(webView)
