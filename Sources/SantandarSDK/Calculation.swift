@@ -33,11 +33,11 @@ public class FrameworkClass
         containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
         containerView.backgroundColor = UIColor.gray
         let  webView = WKWebView()
-        containerView = webView
+       // containerView = webView
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         containerView.addSubview(webView)
-        view.view.addSubview(containerView)
+        view.view.addSubview(webView)
 
     }
     @objc func dismiss(){
