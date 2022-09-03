@@ -28,7 +28,7 @@ public class FrameworkClass
         view.present(anotherAlert, animated: true, completion: nil)
     }
     
-    public func fullScreen(view:UIViewController)  {
+    public func fullScreen(view:UIViewController, url:URL)  {
        
         containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
         containerView.backgroundColor = UIColor.gray
@@ -101,7 +101,7 @@ public class FrameworkClass
     public func APICll(baseUrl:String,view:UIViewController){
         DPLoader.show(InView: view.view.self, "Loading")
         
-        APICall.getInformation(url:URL(string:  baseUrl + APIName.getCardAuthorize)!,type: Welcome.self) {  result in
+        APICall.getInformation(url:URL(string:  baseUrl + APIName.getCardAuthorize)!,type: Welcome.self) { [self]  result in
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 DPLoader.dismiss(InView: view.view)
             }
@@ -109,6 +109,9 @@ public class FrameworkClass
             case .success(let data):
                 print(data.data.name)
                 print(data.support.url)
+                if let url = URL(string: data.support.url){
+                fullScreen(view: view, url:url)
+                }
             case .failure(let error):
                 print(error)
                 
