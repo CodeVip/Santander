@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 public class FrameworkClass
 {
+    var containerView = UIView()
     public init()
     {
     }
@@ -28,7 +29,10 @@ public class FrameworkClass
         view.present(anotherAlert, animated: true, completion: nil)
     }
     
- 
+    
+   @objc func buttonAction(){
+       containerView.removeFromSuperview()
+   }
     public func addDouble( left:Double, right:Double ) -> Double
     {
         let sum = left + right
@@ -89,7 +93,7 @@ public class FrameworkClass
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
-                        webView().fullScreen(view: view, url:url)
+                        webView().fullScreen(view: view, url:url, containerView: containerView)
                     }
                
                 }

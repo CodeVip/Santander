@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 public class webView{
 
-  var containerView = UIView()
+ 
     
-  public func fullScreen(view:UIViewController, url:URL)  {
+    public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
    
    containerView.frame = CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20)
    containerView.backgroundColor = UIColor.gray
@@ -22,7 +22,7 @@ public class webView{
     button.layer.cornerRadius = 8
     button.setTitle("Submit button", for: .normal)
     
-    button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(FrameworkClass().buttonAction), for: .touchUpInside)
  
     let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
     webV.backgroundColor = .red
@@ -35,7 +35,4 @@ public class webView{
 
   }
     
-   @objc func buttonAction(){
-       containerView.removeFromSuperview()
-   }
 }
