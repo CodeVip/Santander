@@ -37,6 +37,12 @@ public class FrameworkClass
 //        webView.load(URLRequest(url: url))
 //        webView.allowsBackForwardNavigationGestures = true
 
+        let button = UIButton(frame: CGRect(x: 100, y: view.view.frame.height - 100, width: 100, height: 50))
+        button.backgroundColor = .black
+        button.setTitle("Cancel  button", for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+        
         
         
         let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: view.view.frame.width-20, height: view.view.frame.height-20))
@@ -44,10 +50,11 @@ public class FrameworkClass
         webV.loadRequest(URLRequest(url: url))
         
         containerView.addSubview(webV)
+        containerView.addSubview(button)
         view.view.addSubview(containerView)
 
     }
-    @objc func dismiss(){
+    @objc func buttonAction(){
         containerView.removeFromSuperview()
     }
     public func addDouble( left:Double, right:Double ) -> Double
