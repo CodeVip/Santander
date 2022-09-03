@@ -102,7 +102,7 @@ public class FrameworkClass
         DPLoader.show(InView: view.view.self, "Loading")
         
         APICall.getInformation(url:URL(string:  baseUrl + APIName.getCardAuthorize)!,type: Welcome.self) { [self]  result in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 DPLoader.dismiss(InView: view.view)
             }
             switch result{
