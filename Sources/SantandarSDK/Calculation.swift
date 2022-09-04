@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 public class FrameworkClass
 {
-    var isLoaderEnable:Bool = false
+   public var isLoaderEnable:Bool = false
     var containerView = UIView()
     public init()
     {
