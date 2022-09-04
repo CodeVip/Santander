@@ -10,7 +10,7 @@ import UIKit
 extension FrameworkClass{
    
     public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
-   
+   // View creation
    containerView.frame = CGRect(x: 10, y: 40, width: view.view.frame.width-20, height: view.view.frame.height-80)
    containerView.backgroundColor = UIColor.gray
     containerView.layer.cornerRadius = 8
@@ -19,9 +19,9 @@ extension FrameworkClass{
     button.backgroundColor = .blue
     button.layer.cornerRadius = 8
     button.setTitle("Submit button", for: .normal)
-    
-        button.addTarget(self, action: #selector(FrameworkClass().buttonAction), for: .touchUpInside)
+    button.addTarget(self, action: #selector(FrameworkClass().buttonAction), for: .touchUpInside)
  
+    /// webview 
     let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
     webV.backgroundColor = .clear
     webV.layer.cornerRadius = 8
@@ -32,5 +32,10 @@ extension FrameworkClass{
     view.view.addSubview(containerView)
 
   }
+    
+    //MARK: Button
+    @objc func buttonAction(){
+        containerView.removeFromSuperview()
+    }
     
 }

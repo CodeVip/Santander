@@ -75,12 +75,7 @@ public class FrameworkClass
         
         return multiple
     }
-    @objc func buttonAction(){
-        
-        containerView.removeFromSuperview()
-        
-    }
-    
+ 
     // MARK: Api call
     
     public func APICll(baseUrl:String,view:UIViewController){
