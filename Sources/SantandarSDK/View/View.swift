@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-public class webView:UIView{
+extension FrameworkClass{
    
     public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
    
@@ -32,7 +32,5 @@ public class webView:UIView{
     view.view.addSubview(containerView)
 
   }
-    
-  
     
 }
