@@ -62,9 +62,7 @@ public class FrameworkClass
                     self.Popup(view: view)
                 }
                 
-                
             }
         }
-       
     }
 }
