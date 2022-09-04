@@ -35,7 +35,7 @@ public class FrameworkClass
    containerView.backgroundColor = UIColor.gray
     containerView.layer.cornerRadius = 8
     // MARK: button
-    let button = UIButton(frame: CGRect(x: 40, y: view.view.frame.height - 100, width: view.view.frame.width - 80, height: 50))
+    let button = UIButton(frame: CGRect(x: 40, y: view.view.frame.height - 160, width: view.view.frame.width - 80, height: 50))
     button.backgroundColor = .blue
     button.layer.cornerRadius = 8
     button.setTitle("Submit button", for: .normal)
