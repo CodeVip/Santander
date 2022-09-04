@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-public class webView{
+public class webView:UIView{
     var containerView = UIView()
     public func fullScreen(view:UIViewController, url:URL)  {
    
