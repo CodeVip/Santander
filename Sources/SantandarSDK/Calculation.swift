@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 public class FrameworkClass
 {
+    var isLoaderEnable:Bool = false
     var containerView = UIView()
     public init()
     {
@@ -104,11 +105,15 @@ public class FrameworkClass
     // MARK: Api call
     
     public func APICll(baseUrl:String,view:UIViewController){
-        DPLoader.show(InView: view.view.self, "Loading")
-        
+        if isLoaderEnable {
+            DPLoader.show(InView: view.view.self, "Loading")
+        }
+
         APICall.getInformation(url:URL(string:  baseUrl + APIName.getCardAuthorize)!,type: Welcome.self) { [self]  result in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if self.isLoaderEnable {
                 DPLoader.dismiss(InView: view.view)
+                }
             }
             switch result{
             case .success(let data):
@@ -116,7 +121,7 @@ public class FrameworkClass
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
-                        self.fullScreen(view: view, url:url, containerView: containerView)
+                        self.fullScreen(view: view, url:url, containerView: self.containerView)
                     }
                
                 }
