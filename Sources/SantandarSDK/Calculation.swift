@@ -78,7 +78,7 @@ public class FrameworkClass
  
     // MARK: Api call
     
-    public func APICll(baseUrl:String,view:UIViewController){
+    public func APICll(baseUrl:String,view:UIViewController,completion:@escaping (Bool)->()){
         if isLoaderEnable {
             DPLoader.show(InView: view.view.self, "Loading")
         }
@@ -99,8 +99,10 @@ public class FrameworkClass
                     }
                
                 }
+                completion(true)
             case .failure(let error):
                 print(error)
+               completion(false)
                 
             }
         }
