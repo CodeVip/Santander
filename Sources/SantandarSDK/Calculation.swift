@@ -17,8 +17,8 @@ public class FrameworkClass
     {
     }
    
-    public func Popup(view:UIViewController){
-        let anotherAlert = UIAlertController(title: "New One", message: "The Previous one is dismissed", preferredStyle: .alert)
+    public func Popup(view:UIViewController,errorMeaage:String){
+        let anotherAlert = UIAlertController(title: "Error", message: "The Previous one is dismissed", preferredStyle: .alert)
            let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
 //                  let nextAlert = UIAlertController(title: "Second one", message: "The Previous one is dismissed", preferredStyle: .alert)
 //               let okAction1 = UIAlertAction(title: "OK", style: .default, handler: {action in
@@ -59,7 +59,7 @@ public class FrameworkClass
                 print(error)
                completion(false)
                 DispatchQueue.main.async {
-                    self.Popup(view: view)
+                    self.Popup(view: view, errorMeaage: error.localizedDescription)
                 }
                 
             }
