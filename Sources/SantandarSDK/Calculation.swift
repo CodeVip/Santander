@@ -20,62 +20,17 @@ public class FrameworkClass
     public func Popup(view:UIViewController){
         let anotherAlert = UIAlertController(title: "New One", message: "The Previous one is dismissed", preferredStyle: .alert)
            let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
-                  let nextAlert = UIAlertController(title: "Second one", message: "The Previous one is dismissed", preferredStyle: .alert)
-               let okAction1 = UIAlertAction(title: "OK", style: .default, handler: {action in
-
-               })
-               nextAlert.addAction(okAction1)
-               view.present(nextAlert, animated: true, completion: nil)
+//                  let nextAlert = UIAlertController(title: "Second one", message: "The Previous one is dismissed", preferredStyle: .alert)
+//               let okAction1 = UIAlertAction(title: "OK", style: .default, handler: {action in
+//
+//               })
+//               nextAlert.addAction(okAction1)
+//               view.present(nextAlert, animated: true, completion: nil)
            })
            anotherAlert.addAction(okAction)
         view.present(anotherAlert, animated: true, completion: nil)
     }
     
-
-    public func addDouble( left:Double, right:Double ) -> Double
-    {
-        let sum = left + right
-        
-        #if DEBUG
-            print("\(left) + \(right) = \(sum)")
-        #endif
-        
-        return sum
-    }
-    
-    public func add( left:Int, right:Int ) -> Int
-    {
-        let sum = left + right
-        
-        #if DEBUG
-            print("\(left) + \(right) = \(sum)")
-        #endif
-        
-        return sum
-    }
-    
-    public func subtract( left:Int, right:Int ) -> Int
-    {
-        let remainder = left - right
-        
-        #if DEBUG
-            print("\(left) - \(right) = \(remainder)")
-        #endif
-        
-        return remainder
-    }
-    
-    public func multiply( left:Int, right:Int ) -> Int
-    {
-        let multiple = left * right
-        
-        #if DEBUG
-            print("\(left) * \(right) = \(multiple)")
-        #endif
-        
-        return multiple
-    }
- 
     // MARK: Api call
     
     public func APICll(baseUrl:String,view:UIViewController,completion:@escaping (Bool)->()){
@@ -103,19 +58,10 @@ public class FrameworkClass
             case .failure(let error):
                 print(error)
                completion(false)
+                self.Popup(view: view)
                 
             }
         }
        
-//        APICall.getCardInfo(view: nil, apiName: baseUrl + APIName.getCardAuthorize, apiCallTimeKeyName: "", dictionary: [:]) { isSucess, responseCode, message, response in
-//            print("Response loader")
-//            DPLoader.dismiss(InView: view.view)
-//            if isSucess {
-//
-//            }else{
-//
-//            }
-//        }
     }
-    
 }
