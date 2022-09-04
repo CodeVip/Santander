@@ -58,7 +58,10 @@ public class FrameworkClass
             case .failure(let error):
                 print(error)
                completion(false)
-                self.Popup(view: view)
+                DispatchQueue.main.async {
+                    self.Popup(view: view)
+                }
+                
                 
             }
         }
