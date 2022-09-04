@@ -18,7 +18,7 @@ public class FrameworkClass
     }
    
     public func Popup(view:UIViewController,errorMeaage:String){
-        let anotherAlert = UIAlertController(title: "Error", message: "The Previous one is dismissed", preferredStyle: .alert)
+        let anotherAlert = UIAlertController(title: "Error", message: errorMeaage, preferredStyle: .alert)
            let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
 //                  let nextAlert = UIAlertController(title: "Second one", message: "The Previous one is dismissed", preferredStyle: .alert)
 //               let okAction1 = UIAlertAction(title: "OK", style: .default, handler: {action in
