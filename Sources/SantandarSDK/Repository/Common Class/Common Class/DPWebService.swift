@@ -345,6 +345,7 @@ class DPLoader : UIView {
             InView?.addSubview(loader)
         })
     }
+    
     class func dismiss(InView:UIView?) {
         DispatchQueue.main.async {
             guard let loader = InView?.viewWithTag(1322) as? DPLoader else {return}

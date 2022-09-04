@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 public class FrameworkClass
 {
+    var containerView = UIView()
    public var isLoaderEnable:Bool = false
     
     public init()
@@ -74,7 +75,11 @@ public class FrameworkClass
         
         return multiple
     }
- 
+    @objc func buttonAction(){
+        
+        containerView.removeFromSuperview()
+        
+    }
     
     // MARK: Api call
     
@@ -95,7 +100,7 @@ public class FrameworkClass
                 print(data.support.url)
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
-                        webView().fullScreen(view: view, url:url)
+                        webView().fullScreen(view: view, url:url,containerView:self.containerView)
                     }
                
                 }
