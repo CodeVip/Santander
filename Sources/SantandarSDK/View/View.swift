@@ -34,7 +34,9 @@ public class webView{
   }
     
    @objc func buttonAction(){
+       
        containerView.removeFromSuperview()
+       
    }
     
 }
