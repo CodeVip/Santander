@@ -20,7 +20,7 @@ public class webView:UIView{
     button.layer.cornerRadius = 8
     button.setTitle("Submit button", for: .normal)
     
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(webView().buttonAction), for: .touchUpInside)
  
     let webV:UIWebView = UIWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
     webV.backgroundColor = .clear
