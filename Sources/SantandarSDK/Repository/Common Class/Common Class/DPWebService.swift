@@ -86,18 +86,35 @@ class DPWebService: NSObject {
     }
     
 
-    class open func requestService<T:Codable>(url:URL?,type:T.Type,completion: @escaping (Result<T,Error>)->Void){
-        guard let url = url else{
+    class open func requestService<T:Codable>(methodName:DPMethod,url:URL?,type:T.Type,body:NSMutableDictionary?,completion: @escaping (Result<T,Error>)->Void){
+        guard var url = url else{
             completion(.failure(CustomError.invalidUrl))
             return
         }
         let config = URLSessionConfiguration.default
-
+     
         config.isDiscretionary          = true
         config.sessionSendsLaunchEvents = true
         let session = URLSession(configuration: config)
+        
+        let apiParameter = DPWebService.stringFromDictionary(apibody: body ?? [:])
+        if (methodName == .GET) { //  || methodName == .DELETE)
+            url = URL.init(string:"\(url.absoluteString)\(apiParameter)".encodeUrl()) ?? url
+        }
+        
+        var request = NSMutableURLRequest(url: url)
+        request.httpMethod = methodName.rawValue
+        request = DPWebService.header(request: request)
+        let apibody = DPWebService.getBody(body: body)
+        
+            if methodName != .GET  { // && methodName != .DELETE
+                let jsonData = try! JSONSerialization.data(withJSONObject: apibody, options: [])
+                
+                request.httpBody = jsonData
+                debugPrint(NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String)
+            }
 
-        let task = session.dataTask(with: url) { data, _, error in
+        let task = session.dataTask(with: request as URLRequest) { data, _, error in
             guard let data = data else{
                 if let error = error{
                     completion(.failure(error))
@@ -142,13 +159,12 @@ class DPWebService: NSObject {
         
         var request = NSMutableURLRequest(url: url!)
         let config = URLSessionConfiguration.default
-        
         config.isDiscretionary          = true
         config.sessionSendsLaunchEvents = true
         let session = URLSession(configuration: config) //session.delegate = self
         request.httpMethod = methodName.rawValue
-        request = DPWebService.header(request: request, apiName: api, body: body)
-        let apibody = DPWebService.getBody(body: body, apiName: api)
+        request = DPWebService.header(request: request)
+        let apibody = DPWebService.getBody(body: body)
         
             if methodName != .GET  { // && methodName != .DELETE
                 let jsonData = try! JSONSerialization.data(withJSONObject: apibody, options: [])
@@ -232,12 +248,12 @@ class DPWebService: NSObject {
         return true
     }
     
-    class func header(request: NSMutableURLRequest, apiName: String, body: NSMutableDictionary? = nil) -> NSMutableURLRequest {
+    class func header(request: NSMutableURLRequest) -> NSMutableURLRequest {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
     }
     
-    class func getBody(body:NSMutableDictionary?, apiName: String) -> NSMutableDictionary{
+    class func getBody(body:NSMutableDictionary?) -> NSMutableDictionary{
         
         var apibody:NSMutableDictionary!
         if body == nil {

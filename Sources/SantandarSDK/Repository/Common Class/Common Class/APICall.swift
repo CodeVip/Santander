@@ -38,7 +38,7 @@ struct APICall {
     }
     
     public static func getInformation<T:Codable>(url:URL,type:T.Type, completion: @escaping (Result<T,Error>)->Void){
-        DPWebService.requestService(url: url, type: type) {  result in
+        DPWebService.requestService(methodName: .GET,url: url, type: type,body:[:]) {  result in
             switch result{
             case .success(let welcome):
                // print(welcome)
