@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 public class webView{
     var containerView = UIView()
-    public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
+    public func fullScreen(view:UIViewController, url:URL)  {
    
    containerView.frame = CGRect(x: 10, y: 40, width: view.view.frame.width-20, height: view.view.frame.height-80)
    containerView.backgroundColor = UIColor.gray
