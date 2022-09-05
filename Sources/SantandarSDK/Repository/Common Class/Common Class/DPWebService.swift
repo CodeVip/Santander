@@ -113,11 +113,12 @@ class DPWebService: NSObject {
                 request.httpBody = jsonData
                 debugPrint(NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String)
             }
-
+         
         let task = session.dataTask(with: request as URLRequest) { data, _, error in
             guard let data = data else{
                 if let error = error{
                     completion(.failure(error))
+                    
                 }else{
                     completion(.failure(CustomError.inValidData))
                 }

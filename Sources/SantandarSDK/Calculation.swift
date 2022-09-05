@@ -11,10 +11,12 @@ import WebKit
 public class FrameworkClass
 {
     var containerView = UIView()
-   public var isLoaderEnable:Bool = false
+    public var isLoaderEnable:Bool = false
+    public var isLoggingEnabled:Bool = false
     
-    public init()
+    public init(_ isLoggingEnabled:Bool = false)
     {
+     kUserDefults(isLoggingEnabled, key: "isLoggingEnabled")
     }
    
     public func Popup(view:UIViewController,errorMeaage:String){
@@ -48,6 +50,7 @@ public class FrameworkClass
             case .success(let data):
                 print(data.data.name)
                 print(data.support.url)
+                Log.d("\(data)")
                 if let url = URL(string: data.support.url){
                     DispatchQueue.main.async {
                         self.fullScreen(view: view, url:url,containerView:self.containerView)
@@ -57,6 +60,7 @@ public class FrameworkClass
                 completion(true)
             case .failure(let error):
                 print(error)
+                Log.e("\(error.localizedDescription)")
                completion(false)
                 DispatchQueue.main.async {
                     self.Popup(view: view, errorMeaage: error.localizedDescription)
