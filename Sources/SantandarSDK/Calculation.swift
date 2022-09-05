@@ -14,7 +14,7 @@ public class FrameworkClass
     public var isLoaderEnable:Bool = false
     public var isLoggingEnabled:Bool = false
     
-    public init(_ isLoggingEnabled:Bool = false)
+    public init(isLoggingEnabled:Bool = false)
     {
      kUserDefults(isLoggingEnabled, key: "isLoggingEnabled")
     }
