@@ -88,7 +88,9 @@ class DPWebService: NSObject {
 
     class open func requestService<T:Codable>(methodName:DPMethod,url:URL?,type:T.Type,body:NSMutableDictionary?,completion: @escaping (Result<T,Error>)->Void){
         guard var url = url else{
+            Log.e("Failed:\(CustomError.invalidUrl)")
             completion(.failure(CustomError.invalidUrl))
+            
             return
         }
         let config = URLSessionConfiguration.default
@@ -118,18 +120,22 @@ class DPWebService: NSObject {
             guard let data = data else{
                 if let error = error{
                     completion(.failure(error))
+                    Log.e("Failed: \(error)")
                     
                 }else{
                     completion(.failure(CustomError.inValidData))
+                    Log.e("Failed: \(CustomError.inValidData)")
                 }
                 return
             }
             do{
                 let result = try JSONDecoder().decode(type, from: data)
+                Log.d("Parsing done sucessfully:\(result)")
                 completion(.success(result))
 
             }catch{
                 completion(.failure(error))
+                Log.e("Failed: \(error)")
             }
         }
         task.resume()
