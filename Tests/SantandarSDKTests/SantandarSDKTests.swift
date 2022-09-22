@@ -8,4 +8,19 @@ final class SantandarSDKTests: XCTestCase {
         // results.
         XCTAssertEqual(SantandarSDK().text, "Hello, World!")
     }
+
+    
+    func test_Netavailablity() throws{
+       // HttpUtility()
+        let reachability =  Reachability()
+        let networkStatus  = reachability?.currentReachabilityStatus
+        
+        if networkStatus == .notReachable {
+            XCTAssertEqual(networkStatus, .notReachable)
+        }
+        if networkStatus == .reachableViaWiFi {
+            XCTAssertEqual(networkStatus, .reachableViaWiFi)
+        }
+    }
+    
 }

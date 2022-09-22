@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by Mohit Sharma on 04/09/22.
+//  Created by Vipin Chaudhary on 04/09/22.
 //
 
 import Foundation
@@ -18,7 +18,11 @@ extension FrameworkClass{
     let button = UIButton(frame: CGRect(x: 40, y: view.view.frame.height - 160, width: view.view.frame.width - 80, height: 50))
     button.backgroundColor = .blue
     button.layer.cornerRadius = 8
-    button.setTitle("Submit button", for: .normal)
+        
+    let text = NSLocalizedString("Submit_button", tableName: "Localizable", bundle: .module, value: "", comment: "")
+
+        
+    button.setTitle(text, for: .normal)
     button.addTarget(self, action: #selector(FrameworkClass().buttonAction), for: .touchUpInside)
  
     /// webview 

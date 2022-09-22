@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by Mohit Sharma on 01/09/22.
+//  Created by Vipin Chaudhary on 01/09/22.
 //
 
 import Foundation
@@ -21,11 +21,11 @@ public enum ReachabilityError: Error {
 public let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
 
 func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
-    
+
     guard let info = info else { return }
-    
+
     let reachability = Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue()
-    
+
     DispatchQueue.main.async {
         reachability.reachabilityChanged()
     }
