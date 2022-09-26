@@ -46,7 +46,8 @@ public class FrameworkClass
     viewModel.callBackToView = {
         completion(true)
         self.dismissLoader(view: view)
-        if let url = URL(string: self.viewModel.welData.support.url){
+       // if let url = URL(string: self.viewModel.welData.support.url){
+        if let url = URL(string: "http://www.example.com"){
               DispatchQueue.main.async {
                  self.fullScreen(view: view, url:url,containerView:self.containerView)
           }
