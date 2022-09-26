@@ -65,7 +65,7 @@ public class FrameworkClass
 }
 
     func dismissLoader(view:UIViewController){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
          if self.isLoaderEnable {
            DPLoader.dismiss(InView: view.view)
           }
