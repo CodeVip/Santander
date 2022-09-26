@@ -13,6 +13,7 @@ public class FrameworkClass
     var containerView = UIView()
     public var isLoaderEnable:Bool = false
     public var isLoggingEnabled:Bool = false
+    public var localization:String = ""
     
     lazy var viewModel:SantanderViewModel! = {
         let service = HttpUtility()

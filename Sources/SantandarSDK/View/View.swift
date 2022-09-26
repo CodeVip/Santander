@@ -18,8 +18,8 @@ extension FrameworkClass{
     let button = UIButton(frame: CGRect(x: 40, y: view.view.frame.height - 160, width: view.view.frame.width - 80, height: 50))
     button.backgroundColor = .blue
     button.layer.cornerRadius = 8
-        
-    let text = NSLocalizedString("Submit_button", tableName: "Localizable", bundle: .module, value: "", comment: "")
+       // NSLocalizedString("Submit_button".localizableString(loc: "en"), comment: "")
+    let text = NSLocalizedString("Submit_button".localizableString(loc: localization), tableName: "Localizable", bundle: .module, value: "", comment: "")
 
         
     button.setTitle(text, for: .normal)
