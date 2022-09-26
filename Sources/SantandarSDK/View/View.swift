@@ -19,8 +19,7 @@ extension FrameworkClass{
     button.backgroundColor = .blue
     button.layer.cornerRadius = 8
        // NSLocalizedString("Submit_button".localizableString(loc: "en"), comment: "")
-        let text = NSLocalizedString("Submit_button".localizableString(loc: localization), tableName: "Localizable", bundle: .module, value: localization, comment: "")
- //  let text1 = NSLocalizedString(
+        let text = "Submit_button".localizableString(loc: localization)
         
     button.setTitle(text, for: .normal)
     button.addTarget(self, action: #selector(FrameworkClass().buttonAction), for: .touchUpInside)
