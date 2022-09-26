@@ -10,9 +10,9 @@ extension String{
     }
     
     func localizableString(loc:String)->String{
-        let path = Bundle.main.path(forResource: loc, ofType: "lproj")
+       let path =     Bundle.module.path(forResource: loc, ofType: "lproj")
         let bundle = Bundle(path: path!)
-        return NSLocalizedString(self, tableName: "Localizable", bundle: .module, value: loc, comment: "")
+        return NSLocalizedString(self, bundle:bundle!,value: "", comment: "")
     }
 }
 
