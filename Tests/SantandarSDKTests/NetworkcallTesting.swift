@@ -15,7 +15,7 @@ class NetworkcallTesting: XCTestCase {
         let obj = FrameworkClass()
         let baseUrl = "https://reqres.in/api/"
         let expectation = self.expectation(description: "CheckResponse")
-        obj.APICll(baseUrl: baseUrl, view: UIViewController().self) { isSucess in
+        obj.APICll(baseUrl: baseUrl, body: [:], view: UIViewController().self) { isSucess in
 
                 print("Api result is in inside --------- \(isSucess)")
                 XCTAssertEqual(isSucess, true)

@@ -35,12 +35,12 @@ public class FrameworkClass
     }
     
     // MARK: Api call
- public func APICll(baseUrl:String,view:UIViewController,completion:@escaping (Bool)->()){
+ public func APICll(baseUrl:String,body:NSMutableDictionary?,view:UIViewController,completion:@escaping (Bool)->()){
     if isLoaderEnable {
         DPLoader.show(InView: view.view.self, "Loading")
     }
     // Call to the view model for api
-    viewModel.calToFetchData(baseUrl: baseUrl)
+     viewModel.calToFetchData(baseUrl: baseUrl,body:body)
     
      // suceess with data
     viewModel.callBackToView = {

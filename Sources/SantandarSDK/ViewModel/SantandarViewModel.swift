@@ -30,8 +30,8 @@ init(service: HttpUtility!) {
 var callBackToView:()->() = {}
 var callBackToViewServerError: ()->() = {}
     
-func calToFetchData(baseUrl:String) {
-    service.postService(methodName: .GET, url: URL(string:  baseUrl + APIName.getCardAuthorize)!, type: Welcome.self, body: [:]){ result in
+func calToFetchData(baseUrl:String,body:NSMutableDictionary?) {
+    service.postService(methodName: .POST, url: URL(string:  baseUrl + APIName.getCardAuthorize)!, type: Welcome.self, body: body){ result in
         switch result{
         case .success(let data):
             Log.d("\(data)")
