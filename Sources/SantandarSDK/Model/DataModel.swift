@@ -9,25 +9,14 @@ import Foundation
 
 // MARK: - Welcome
 struct Welcome: Codable {
-    let data: DataClass
-    let support: Support
+    let success: Bool
+    let data: Data
+    let errorCode: Int
+    let message: String
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
-    let id: Int
-    let name: String
-    let year: Int
-    let color, pantoneValue: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, year, color
-        case pantoneValue = "pantone_value"
-    }
+struct Data: Codable {
+    let id, status: Int
 }
 
-// MARK: - Support
-struct Support: Codable {
-    let url: String
-    let text: String
-}
