@@ -18,9 +18,9 @@ public func kUserDefults(_ value: Any?, key: String, isArchive: Bool = false ) {
 }
 public func kUserDefults_( _ key : String) -> Any? {
     let defults = UserDefaults.standard
-    if  let data = defults.value(forKey: key) as? Data {
-        return NSKeyedUnarchiver.unarchiveObject(with: data)
-    }
+//    if  let data = defults.value(forKey: key) as? data {
+//        return NSKeyedUnarchiver.unarchiveObject(with: data)
+//    }
     return defults.value(forKey: key)
 }
 
