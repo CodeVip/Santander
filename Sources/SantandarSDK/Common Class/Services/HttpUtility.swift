@@ -77,8 +77,8 @@ class HttpUtility: NSObject {
                 return
             }
             do{
-                let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                print(json)
+                var backToString = String(data: data, encoding: String.Encoding.utf8) as String?
+                print(backToString)
                 let result = try JSONDecoder().decode(type, from: data)
                 Log.d("Parsing done sucessfully:\(result)")
                 completion(.success(result))
