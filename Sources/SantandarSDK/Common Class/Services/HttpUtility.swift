@@ -51,20 +51,20 @@ class HttpUtility: NSObject {
             return
         }
         
-        var request = NSMutableURLRequest(url: url)
+        var request = NSMutableURLRequest(url: URL.init(string:"\(url.absoluteString)\(String(describing: body!))".encodeUrl()) ?? url)
         request.httpMethod = "GET"
         request = HttpUtility.header(request: request)
         let apibody = HttpUtility.getBody(body: body)
-           // if methodName != .GET  { // && methodName != .DELETE
+          if methodName != .GET  { // && methodName != .DELETE
                 let jsonData = try! JSONSerialization.data(withJSONObject: apibody, options: [])
                 
                 request.httpBody = jsonData
                 debugPrint(NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String)
-           // }
+           }
         let  url1 = URL.init(string:"\(url.absoluteString)\(String(describing: body!))".encodeUrl()) ?? url
         
         print(url1)
-        URLSession.shared.dataTask(with: url1) { data, _, error in
+        URLSession.shared.dataTask(with: request as URLRequest  ) { data, _, error in
             guard let data = data else{
                 if let error = error{
                     completion(.failure(error))
