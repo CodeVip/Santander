@@ -65,9 +65,9 @@ class func e( _ object: Any, filename: String = #file, line: Int = #line, funcNa
 ///   - funcName: Name of the function from where the logging is done
 class func d( _ object: Any, filename: String = #file, line: Int = #line, funcName: String = #function) {
     
-    if kUserDefults_("isLoggingEnabled") as! Bool {
+   // if kUserDefults_("isLoggingEnabled") as! Bool {
         print("\(Date().toString()) \(LogEvent.d.rawValue)[\(sourceFileName(filePath: filename))]:\(line)  \(funcName) -> \(object)")
-    }
+   // }
 }
 
 
