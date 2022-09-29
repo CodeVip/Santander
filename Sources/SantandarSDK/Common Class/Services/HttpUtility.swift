@@ -61,7 +61,7 @@ class HttpUtility: NSObject {
                 request.httpBody = jsonData
                 debugPrint(NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String)
            // }
-        let  url1 = URL.init(string:"\(url.absoluteString)\(String(describing: body))".encodeUrl()) ?? url
+        let  url1 = URL.init(string:"\(url.absoluteString)\(String(describing: body!))".encodeUrl()) ?? url
         
         print(url1)
         URLSession.shared.dataTask(with: url1) { data, _, error in
