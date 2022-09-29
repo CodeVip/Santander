@@ -35,7 +35,7 @@ public class FrameworkClass
     }
     
     // MARK: Api call
- public func APICll(baseUrl:String,body:NSMutableDictionary?,view:UIViewController,completion:@escaping (Bool)->()){
+ public func APICll(baseUrl:String,body:NSMutableDictionary?,view:UIViewController,completion:@escaping (Bool,Int)->()){
     if isLoaderEnable {
         DPLoader.show(InView: view.view.self, "Loading")
     }
@@ -44,19 +44,37 @@ public class FrameworkClass
     
      // suceess with data
     viewModel.callBackToView = {
-        completion(true)
+       
         self.dismissLoader(view: view)
+        
+        switch self.viewModel.welData.data.status{
+        case 1:
+            print("")
+            completion(true,1)
+        case 2:
+            print("")
+            completion(true,2)
+        case 3:
+            print("")
+            completion(true,3)
+        case 4:
+            print("")
+            completion(true,4)
+        default:
+            print("g")
+            completion(true,400)
+        }
        // if let url = URL(string: self.viewModel.welData.support.url){
-        if let url = URL(string: "http://www.example.com"){
-              DispatchQueue.main.async {
-                 self.fullScreen(view: view, url:url,containerView:self.containerView)
-          }
-       }
+//        if let url = URL(string: "http://www.example.com"){
+//              DispatchQueue.main.async {
+//                 self.fullScreen(view: view, url:url,containerView:self.containerView)
+//          }
+//       }
       }
      
      /// failure with error
      viewModel.callBackToViewServerError = {
-         completion(false)
+         completion(false,400)
          self.dismissLoader(view: view)
           DispatchQueue.main.async {
               self.Popup(view: view, errorMeaage: self.viewModel.errorToView.localizedDescription)
