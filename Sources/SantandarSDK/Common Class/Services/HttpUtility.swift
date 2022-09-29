@@ -75,6 +75,8 @@ class HttpUtility: NSObject {
                 return
             }
             do{
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                print(json)
                 let result = try JSONDecoder().decode(type, from: data)
                 Log.d("Parsing done sucessfully:\(result)")
                 completion(.success(result))
