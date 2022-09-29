@@ -62,7 +62,7 @@ class HttpUtility: NSObject {
                 debugPrint(NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String)
            // }
         let  url1 = URL.init(string:"\(url.absoluteString)\(String(describing: body))".encodeUrl()) ?? url
-        URLSession.shared.dataTask(with:url1) { data, _, error in
+        URLSession.shared.dataTask(with: request as URLRequest) { data, _, error in
             guard let data = data else{
                 if let error = error{
                     completion(.failure(error))
