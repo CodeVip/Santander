@@ -51,8 +51,8 @@ class HttpUtility: NSObject {
             return
         }
         
-        var request = NSMutableURLRequest(url: URL.init(string:"\(url.absoluteString)\(String(describing: body!))".encodeUrl()) ?? url)
-        request.httpMethod = "GET"
+        var request = NSMutableURLRequest(url:url)
+        request.httpMethod = "POST"
         request = HttpUtility.header(request: request)
         let apibody = HttpUtility.getBody(body: body)
           if methodName != .GET  { // && methodName != .DELETE
