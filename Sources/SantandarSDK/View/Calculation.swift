@@ -12,7 +12,7 @@ import CoreNFC
 
 public class FrameworkClass:NSObject
 {
-    let viewModel = ViewModel()
+    let viewModel1 = ViewModel()
     var containerView = UIView()
     public var isLoaderEnable:Bool = false
     public var isLoggingEnabled:Bool = false
@@ -184,7 +184,7 @@ extension FrameworkClass:NFCNDEFReaderSessionDelegate{
     
     @available(iOS 13.0, *)
     public func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {
-        let str: String = viewModel.theActualData
+        let str: String = viewModel1.theActualData
         if tags.count > 1 {
             let retryInterval = DispatchTimeInterval.microseconds(500)
             session.alertMessage = "More than one tag found, Please remove them and try again"
@@ -214,7 +214,7 @@ extension FrameworkClass:NFCNDEFReaderSessionDelegate{
                     session.alertMessage = "This tag is locked"
                     session.invalidate()
                 case .readWrite:
-                    if self.viewModel.isReadTag || self.viewModel.isActivateCard {
+                    if self.viewModel1.isReadTag || self.viewModel1.isActivateCard {
                         tag.readNDEF { message, error in
                             if nil != error {
                                 session.alertMessage = "Read NDEF Message failed"
@@ -233,18 +233,18 @@ extension FrameworkClass:NFCNDEFReaderSessionDelegate{
                                         let arr = payload.split(separator: "?")
                                         for item in arr {
                                             if item.contains("cardId") {
-                                                if !self.viewModel.isActivateCard {
+                                                if !self.viewModel1.isActivateCard {
                                                     let arr = item.split(separator: "=")
-                                                    self.viewModel.cardid = String(arr[1])
-                                                    self.viewModel.checkforTheActivation(completion: { [self] (data, err) in
+                                                    self.viewModel1.cardid = String(arr[1])
+                                                    self.viewModel1.checkforTheActivation(completion: { [self] (data, err) in
                                                         if err == nil {
-                                                            self.alertMessage(title: "", subtitle: self.viewModel.parsersponseData(data!))
+                                                           // self.alertMessage(title: "", subtitle: self.viewModel1.parsersponseData(data!))
                                                         } else {
-                                                            self.alertMessage(title: "Opps", subtitle: err!.localizedDescription)
+                                                            //self.alertMessage(title: "Opps", subtitle: err!.localizedDescription)
                                                         }
                                                     })
                                                 } else {
-                                                    self.alertMessage(title: "Card Data", subtitle: String(item))
+                                                   // self.alertMessage(title: "Card Data", subtitle: String(item))
                                                 }
                                                 break
                                             }
