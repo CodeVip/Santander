@@ -18,6 +18,7 @@ public class FrameworkClass:NSObject
     public var isLoggingEnabled:Bool = false
     public var localization:String = ""
     var session: NFCNDEFReaderSession?
+    var callback: ((_ id: Int64) -> Void)?
       // var productStore = ProductStore.shared
    var view1:UIViewController?
     
@@ -236,13 +237,15 @@ extension FrameworkClass:NFCNDEFReaderSessionDelegate{
                                                 if !self.viewModel1.isActivateCard {
                                                     let arr = item.split(separator: "=")
                                                     self.viewModel1.cardid = String(arr[1])
-                                                    self.viewModel1.checkforTheActivation(completion: { [self] (data, err) in
-                                                        if err == nil {
-                                                           // self.alertMessage(title: "", subtitle: self.viewModel1.parsersponseData(data!))
-                                                        } else {
-                                                            //self.alertMessage(title: "Opps", subtitle: err!.localizedDescription)
-                                                        }
-                                                    })
+                                                    
+                                                    self.callback?(Int64(arr[1]) ?? 10)
+//                                                    self.viewModel1.checkforTheActivation(completion: { [self] (data, err) in
+//                                                        if err == nil {
+//                                                           // self.alertMessage(title: "", subtitle: self.viewModel1.parsersponseData(data!))
+//                                                        } else {
+//                                                            //self.alertMessage(title: "Opps", subtitle: err!.localizedDescription)
+//                                                        }
+//                                                    })
                                                 } else {
                                                    // self.alertMessage(title: "Card Data", subtitle: String(item))
                                                 }
