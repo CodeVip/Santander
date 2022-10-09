@@ -17,6 +17,12 @@ private(set)  var welData:Welcome! {
   }
 }
     
+  private(set)  var CardStat:CardStatus! {
+      didSet{
+          self.callBackForCardStatusToView()
+      }
+    }
+    
 private(set) var errorToView:Error!{
         didSet{
             self.callBackToViewServerError()
@@ -29,6 +35,9 @@ init(service: HttpUtility!) {
     
 var callBackToView:()->() = {}
 var callBackToViewServerError: ()->() = {}
+    
+var callBackForCardStatusToView:()->() = {}
+var callBackForCardStatusToServerError: ()->() = {}
     
 func calToFetchData(baseUrl:String,body:NSMutableDictionary?) {
     service.postService(methodName: .POST, url: URL(string:  baseUrl + APIName.getCardAuthorize)!, type: Welcome.self, body: body){ result in
@@ -43,4 +52,19 @@ func calToFetchData(baseUrl:String,body:NSMutableDictionary?) {
         }
     }
   }
+    
+    func calToActivateCard(baseUrl:String,body:NSMutableDictionary?) {
+        service.postService(methodName: .POST, url: URL(string:  baseUrl + APIName.activate_card)!, type: CardStatus.self, body: body){ result in
+            switch result{
+            case .success(let data):
+                Log.d("\(data)")
+                self.CardStat = data
+            case .failure(let error):
+                Log.e("\(error.localizedDescription)")
+                self.errorToView = error
+               
+            }
+        }
+      }
+
 }

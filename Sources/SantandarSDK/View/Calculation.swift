@@ -58,7 +58,6 @@ public class FrameworkClass:NSObject
     }
     
     
-    
  public func APICll(baseUrl:String,body:NSMutableDictionary?,view:UIViewController,completion:@escaping (Bool,Int)->()){
     if isLoaderEnable {
         DPLoader.show(InView: view.view.self, "Loading")
@@ -99,6 +98,32 @@ public class FrameworkClass:NSObject
      /// failure with error
      viewModel.callBackToViewServerError = {
          completion(false,400)
+         self.dismissLoader(view: view)
+          DispatchQueue.main.async {
+              self.Popup(view: view, errorMeaage: self.viewModel.errorToView.localizedDescription)
+          }
+     }
+}
+    
+    
+ public func CardActivation(baseUrl:String,body:NSMutableDictionary?,view:UIViewController,completion:@escaping (Bool,String)->()){
+    if isLoaderEnable {
+        DPLoader.show(InView: view.view.self, "Loading")
+    }
+    // Call to the view model for api
+     viewModel.calToFetchData(baseUrl: baseUrl,body:body)
+    
+     // suceess with data
+     viewModel.callBackForCardStatusToView = {
+       
+        self.dismissLoader(view: view)
+         completion(true, self.viewModel.CardStat.message)
+        
+      }
+     
+     /// failure with error
+     viewModel.callBackToViewServerError = {
+         completion(false,"Error")
          self.dismissLoader(view: view)
           DispatchQueue.main.async {
               self.Popup(view: view, errorMeaage: self.viewModel.errorToView.localizedDescription)

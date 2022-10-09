@@ -20,3 +20,17 @@ struct DataCard: Codable {
     let id, status: Int
 }
 
+
+
+// MARK: - Welcome
+struct CardStatus: Codable {
+    let success: Bool
+    let data: CardInfo
+    let errorCode: Int
+    let message: String
+}
+
+// MARK: - DataClass
+struct CardInfo: Codable {
+    let id: Int
+}

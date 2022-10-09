@@ -48,5 +48,6 @@ func isValidUrl(url: String?) -> Bool {
 
 struct APIName {
     static var getCardAuthorize           = "card_status"
+    static var  activate_card             = "activate_card"
    
 }
