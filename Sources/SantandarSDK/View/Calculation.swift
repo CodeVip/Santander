@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import WebKit
-import 
+
 public class FrameworkClass
 {
     var containerView = UIView()
