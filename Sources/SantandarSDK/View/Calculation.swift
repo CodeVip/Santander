@@ -111,7 +111,7 @@ public class FrameworkClass:NSObject
         DPLoader.show(InView: view.view.self, "Loading")
     }
     // Call to the view model for api
-     viewModel.calToFetchData(baseUrl: baseUrl,body:body)
+     viewModel.calToActivateCard(baseUrl: baseUrl,body:body)
     
      // suceess with data
      viewModel.callBackForCardStatusToView = {
