@@ -18,7 +18,7 @@ public class FrameworkClass:NSObject
     public var isLoggingEnabled:Bool = false
     public var localization:String = ""
     var session: NFCNDEFReaderSession?
-    var callback: ((_ id: Int64) -> Void)?
+  public  var callback: ((_ id: Int64) -> Void)?
       // var productStore = ProductStore.shared
    var view1:UIViewController?
     
