@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import WebKit
+import 
 public class FrameworkClass
 {
     var containerView = UIView()
@@ -35,6 +36,12 @@ public class FrameworkClass
     }
     
     // MARK: Api call
+    
+    public func readCard(){
+        let viewCont = ViewController()
+        viewCont.beginReadSeesion()
+        
+    }
  public func APICll(baseUrl:String,body:NSMutableDictionary?,view:UIViewController,completion:@escaping (Bool,Int)->()){
     if isLoaderEnable {
         DPLoader.show(InView: view.view.self, "Loading")

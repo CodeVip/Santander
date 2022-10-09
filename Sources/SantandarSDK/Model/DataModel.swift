@@ -10,13 +10,13 @@ import Foundation
 // MARK: - Welcome
 struct Welcome: Codable {
     let success: Bool
-    let data: Data
+    let data: DataCard
     let errorCode: Int
     let message: String
 }
 
 // MARK: - DataClass
-struct Data: Codable {
+struct DataCard: Codable {
     let id, status: Int
 }
 
