@@ -70,8 +70,7 @@ public class FrameworkClass:NSObject
      // suceess with data
     viewModel.callBackToView = {
        
-     
-        
+    
         if self.isWebview{
             if let url = URL(string: self.webViewURL + self.viewModel.welData.data.web_url){
                 

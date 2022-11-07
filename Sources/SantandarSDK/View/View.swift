@@ -11,7 +11,7 @@ extension FrameworkClass{
    
     public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
    // View creation
-   containerView.frame = CGRect(x: 10, y: 40, width: view.view.frame.width-20, height: view.view.frame.height-80)
+   containerView.frame = CGRect(x: 5, y: 5, width: view.view.frame.width-10, height: view.view.frame.height-10)
    containerView.backgroundColor = UIColor.gray
     containerView.layer.cornerRadius = 8
     // MARK: button
