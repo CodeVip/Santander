@@ -73,11 +73,12 @@ public class FrameworkClass:NSObject
      
         
         if self.isWebview{
-            if let url = URL(string: webViewURL + self.viewModel.welData.data.web_url){
-             if let url = URL(string: "http://www.example.com"){
-                   DispatchQueue.main.async {
-                      self.fullScreen(view: view, url:url,containerView:self.containerView)
-               }
+            if let url = URL(string: self.webViewURL + self.viewModel.welData.data.web_url){
+                
+                    DispatchQueue.main.async {
+                        self.fullScreen(view: view, url:url,containerView:self.containerView)
+                    }
+                
             }
             
         }else{
