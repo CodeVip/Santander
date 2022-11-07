@@ -17,6 +17,8 @@ public class FrameworkClass:NSObject
     public var isLoaderEnable:Bool = false
     public var isLoggingEnabled:Bool = false
     public var localization:String = ""
+    public var isWebview:Bool = false
+    public var webViewURL:String = ""
     var session: NFCNDEFReaderSession?
   public  var callback: ((_ id: Int64) -> Void)?
       // var productStore = ProductStore.shared
@@ -68,31 +70,37 @@ public class FrameworkClass:NSObject
      // suceess with data
     viewModel.callBackToView = {
        
-        self.dismissLoader(view: view)
+     
         
-        switch self.viewModel.welData.data.status{
-        case 1:
-            print("")
-            completion(true,1)
-        case 2:
-            print("")
-            completion(true,2)
-        case 3:
-            print("")
-            completion(true,3)
-        case 4:
-            print("")
-            completion(true,4)
-        default:
-            print("g")
-            completion(true,400)
+        if self.isWebview{
+            if let url = URL(string: webViewURL + self.viewModel.welData.data.web_url){
+             if let url = URL(string: "http://www.example.com"){
+                   DispatchQueue.main.async {
+                      self.fullScreen(view: view, url:url,containerView:self.containerView)
+               }
+            }
+            
+        }else{
+            
+            switch self.viewModel.welData.data.status{
+            case 1:
+                print("")
+                completion(true,1)
+            case 2:
+                print("")
+                completion(true,2)
+            case 3:
+                print("")
+                completion(true,3)
+            case 4:
+                print("")
+                completion(true,4)
+            default:
+                print("g")
+                completion(true,400)
+            }
         }
-       // if let url = URL(string: self.viewModel.welData.support.url){
-//        if let url = URL(string: "http://www.example.com"){
-//              DispatchQueue.main.async {
-//                 self.fullScreen(view: view, url:url,containerView:self.containerView)
-//          }
-//       }
+
       }
      
      /// failure with error

@@ -18,6 +18,8 @@ struct Welcome: Codable {
 // MARK: - DataClass
 struct DataCard: Codable {
     let id, status: Int
+    let web_url,failure_url,success_url:String
+    
 }
 
 
