@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-extension FrameworkClass{
+import WebKit
+extension FrameworkClass:WKScriptMessageHandler{
    
     public func fullScreen(view:UIViewController, url:URL,containerView:UIView)  {
    // View creation
@@ -30,9 +31,22 @@ extension FrameworkClass{
     webV.layer.cornerRadius = 8
     webV.loadRequest(URLRequest(url: url))
     
-    containerView.addSubview(webV)
-    containerView.addSubview(button)
-    view.view.addSubview(containerView)
+//    containerView.addSubview(webV)
+//    containerView.addSubview(button)
+//    view.view.addSubview(containerView)
+        
+        let config = WKWebViewConfiguration()
+           config.userContentController = WKUserContentController()
+           config.userContentController.add(self, name: "backHomePage")
+
+           let webView = WKWebView(frame: CGRect(x: 10, y: 10, width: containerView.frame.width - 20, height: view.view.frame.height-200))
+
+          // view.addSubview(webView)
+
+           webView.load(URLRequest(url: url))
+        containerView.addSubview(webView)
+        containerView.addSubview(button)
+        view.view.addSubview(containerView)
 
   }
     
@@ -40,5 +54,7 @@ extension FrameworkClass{
     @objc func buttonAction(){
         containerView.removeFromSuperview()
     }
-    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+       print(message.body)
+     }
 }
