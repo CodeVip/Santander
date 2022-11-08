@@ -31,9 +31,9 @@ extension FrameworkClass:WKScriptMessageHandler{
     webV.layer.cornerRadius = 8
     webV.loadRequest(URLRequest(url: url))
     
-//    containerView.addSubview(webV)
-//    containerView.addSubview(button)
-//    view.view.addSubview(containerView)
+    containerView.addSubview(webV)
+    containerView.addSubview(button)
+    view.view.addSubview(containerView)
         
         let config = WKWebViewConfiguration()
            config.userContentController = WKUserContentController()
@@ -43,10 +43,10 @@ extension FrameworkClass:WKScriptMessageHandler{
 
           // view.addSubview(webView)
 
-           webView.load(URLRequest(url: url))
-        containerView.addSubview(webView)
-        containerView.addSubview(button)
-        view.view.addSubview(containerView)
+//           webView.load(URLRequest(url: url))
+//        containerView.addSubview(webView)
+//        containerView.addSubview(button)
+//        view.view.addSubview(containerView)
 
   }
     
