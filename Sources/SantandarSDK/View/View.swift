@@ -54,7 +54,7 @@ extension FrameworkClass:WKScriptMessageHandler{
     @objc func buttonAction(){
         containerView.removeFromSuperview()
     }
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
        print(message.body)
      }
 }
